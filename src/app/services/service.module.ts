@@ -1,8 +1,7 @@
 import { NgModule } from "@angular/core";
-import { CartService } from "./cart.service";
-import { ProductService } from "./product.service";
+import { TaskService } from "./task.service";
 
 @NgModule({
-  providers: [CartService, ProductService]
+  providers: [TaskService]
 })
 export class ServiceModule {}

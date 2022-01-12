@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { CartModule } from './cart/cart.module';
-import { ProductModule } from './product/product.module';
 import { ServiceModule } from './services/service.module';
+import { TaskManagerModule } from './task-manager/task-manager.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -12,8 +11,7 @@ import { ServiceModule } from './services/service.module';
   imports: [
     BrowserModule,
     ServiceModule,
-    ProductModule,
-    CartModule
+    TaskManagerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
