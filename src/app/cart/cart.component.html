@@ -1,0 +1,10 @@
+<h2>Cart</h2>
+<div 
+  class="text-center alert alert-warning"
+  *ngIf="items.length === 0">
+  Cart is Empty
+</div>
+<app-cart-list
+  *ngIf="items.length > 0"
+  [items]="items">
+</app-cart-list>
