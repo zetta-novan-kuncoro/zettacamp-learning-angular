@@ -1,4 +1,19 @@
-<div class="container">
-  <app-blog-new-post (postCreate)="onPostCreate($event)"></app-blog-new-post>
-  <app-blog-posts [posts]="posts"></app-blog-posts>
+<nav>
+  <h1>Blog</h1>
+</nav>
+
+<div class="app-blog-post-list">
+  <mat-card *ngFor="let post of posts">
+    <mat-card-title>
+      {{ post.title }}
+    </mat-card-title>
+    <mat-card-body>
+      {{ post.content | slice:0:100 }}
+    </mat-card-body>
+    <mat-card-actions>
+      <a mat-raised-button color="primary" (click)="onClick(post.slug)">
+        VIEW
+      </a>
+    </mat-card-actions>
+  </mat-card>
 </div>

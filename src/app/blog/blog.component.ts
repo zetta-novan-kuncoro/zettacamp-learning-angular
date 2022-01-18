@@ -1,38 +1,27 @@
-import { AfterViewChecked, Component, OnInit } from "@angular/core";
-
-export type Post = {
-  id: number
-  title: string
-  content: string
-}
-
-let posts = [
-  { id: 1234, title: 'How to make an Indomie', content: 'lorem ipsum ajalah' }
-]
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Post } from 'src/data/post';
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'app-blog',
-  templateUrl: './blog.component.html'
+  templateUrl: './blog.component.html',
+  styleUrls: ['./blog.component.scss'],
 })
-export class BlogComponent implements OnInit, AfterViewChecked {
-  posts: Post[]
+export class BlogComponent implements OnInit {
+  posts: Post[] = [];
+
+  constructor(
+    private blog: BlogService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.posts = [...posts]
+    this.blog.postData$.subscribe((value) => (this.posts = value));
   }
 
-  ngAfterViewChecked(): void {
-    if (this.posts.length > posts.length) {
-      posts = [...this.posts]
-      console.log(posts)
-    }
-  }
-
-  onPostCreate({ title, content }) {
-    this.posts.push({
-      id: Math.floor(Math.random() * 2000000),
-      title,
-      content
-    })
+  onClick(slug: string) {
+    this.router.navigate([slug], { relativeTo: this.route });
   }
 }

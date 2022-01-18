@@ -1,6 +1,30 @@
-<div class="mb-2 card">
-  <div class="card-body">
-    <h3 class="card-title">{{ title }}</h3>
-    <ng-content #blogContent></ng-content>
+<nav>
+  <a mat-button routerLink="/blog">&larr; GO BACK</a>
+</nav>
+
+<div *ngIf="!isOnEditMode" class="container">
+  <div>
+    <button mat-button (click)="onClickEdit()">EDIT POST</button>
   </div>
+  <h1>
+    {{ post.title | titlecase }}
+  </h1>
+  <p>
+    {{ post.content }}
+  </p>
 </div>
+
+<form class="container" *ngIf="isOnEditMode">
+  <mat-form-field>
+    <mat-label>Post Title</mat-label>
+    <input matInput #title placeholder="Ex. Work Life Balance" [value]="post.title" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Post Content</mat-label>
+    <textarea matInput #content placeholder="Ex. Balancing your work and your life is quite hard sometimes...">{{ post.content }}</textarea>
+  </mat-form-field>
+  <div>
+    <button mat-raised-button color="primary" (click)="onSubmit({ title: title.value, content: content.value })">UPDATE</button>
+    <a style="margin-left: 1rem;" mat-button (click)="onCancelEdit()">CANCEL</a>
+  </div>
+</form>
