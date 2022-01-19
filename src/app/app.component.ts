@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styles: [`
-    .app-container {
-      width: 100%;
-      min-height: 100vh;
-      background: #1B1B1B;
-      color: #eeeeee;
-    }
-  `]
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en')
+    translate.use('en')
+  }
 }

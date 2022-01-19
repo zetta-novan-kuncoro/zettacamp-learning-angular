@@ -1,0 +1,141 @@
+<header>
+  <h1 translate>
+    Add New User
+  </h1>
+</header>
+
+<form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+  <div class="form-control">
+    <mat-form-field appearance="outline">
+      <mat-label translate>Citizen ID</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="_id"
+        placeholder="Ex. 1234 0987654321"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="form-control" formGroupName="name">
+    <mat-form-field appearance="outline">
+      <mat-label translate>First Name</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="first"
+        placeholder="Ex. John"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label translate>Last Name</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="last"
+        placeholder="Ex. Doe"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="form-control">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        type="email"
+        formControlName="email"
+        placeholder="Ex. johndoe@mail.com"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="form-control">
+    <mat-form-field appearance="outline">
+      <mat-label translate>Age</mat-label>
+      <input matInput type="number" formControlName="age" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label translate>Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="MALE">
+          {{ 'MALE' | translate }}
+        </mat-option>
+        <mat-option value="FEMALE">
+          {{ 'FEMALE' | translate }}
+        </mat-option>
+        <mat-option value="OTHER">
+          {{ 'OTHER' | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label translate>Marital Status</mat-label>
+      <mat-select formControlName="maritalStatus">
+        <mat-option value="MARRIED">
+          {{ 'MARRIED' | translate }}
+        </mat-option>
+        <mat-option value="UNMARRIED" translate>
+          {{ 'UNMARRIED' | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-control">
+    <mat-form-field appearance="outline">
+      <mat-label translate>Profession</mat-label>
+      <input matInput type="text" formControlName="profession" />
+    </mat-form-field>
+  </div>
+
+  <div class="form-group" formGroupName="location">
+    <div class="form-control">
+      <mat-form-field appearance="outline">
+        <mat-label translate>City</mat-label>
+        <input matInput type="text" formControlName="city" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label translate>Region</mat-label>
+        <input matInput type="text" formControlName="region" />
+      </mat-form-field>
+    </div>
+
+    <div
+      class="form-control"
+      formArrayName="addresses"
+      *ngFor="let address of addresses; let i = index"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'Address' | translate }} {{ i + 1 }}</mat-label>
+        <input matInput type="text" [formControlName]="i" />
+      </mat-form-field>
+
+      <button mat-icon-button type="button" (click)="onRemoveAddress(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+    <button
+      mat-flat-button
+      type="button"
+      *ngIf="addresses.length < 3"
+      (click)="onAddAddress()"
+    >
+      {{ 'Add Address' | translate }}
+    </button>
+  </div>
+
+  <button
+    mat-raised-button
+    type="submit"
+    color="primary"
+    [disabled]="editUserForm.invalid"
+  >
+    {{ 'UPDATE' | uppercase | translate }}
+  </button>
+</form>

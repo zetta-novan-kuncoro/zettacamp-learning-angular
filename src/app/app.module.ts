@@ -1,18 +1,15 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app.component';
-import { BlogPostComponent } from './blog/blog-post/blog-post.component';
-import { BlogComponent } from './blog/blog.component';
-import { BlogModule } from './blog/blog.module';
+import { UserManagerModule } from './user-manager/user-manager.module';
 
-
-const routes: Routes = [
-  { path: 'blog', component: BlogComponent, },
-  { path: 'blog/:slug', component: BlogPostComponent },
-  { path: '**', redirectTo: '/blog'}
-]
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -21,8 +18,16 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    BlogModule,
-    RouterModule.forRoot(routes)
+    HttpClientModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    UserManagerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

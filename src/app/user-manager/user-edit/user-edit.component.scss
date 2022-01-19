@@ -1,0 +1,40 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+
+  h1 {
+    margin: 0
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  button[type=submit] {
+    margin-top: 2rem;
+  }
+
+  div.form-group {
+    width: 100%;
+  }
+
+  div.form-control {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+
+    button {
+      margin-bottom: 1rem;
+      align-self: center;
+      flex: none;
+    }
+
+    > * {
+      flex: 1;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+mat-sidenav-container {
+  min-height: 100vh;
+
+  mat-sidenav {
+    position: fixed;
+    width: clamp(240px, 15%, 360px);
+    padding: 1rem;
+
+    a[mat-list-item].active {
+      background-color: #565656;
+    }
+  }
+
+  mat-sidenav-content {
+    padding: 1rem;
+  }
+}
